@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
+import userRouter from './routes/user.route.js'
 dotenv.config();
 
 mongoose
@@ -18,3 +19,4 @@ app.listen(8888, () => {
   console.log("server is running on port 8888!!!!!");
 });
 
+app.use("/api/user",userRouter)
