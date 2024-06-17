@@ -5,10 +5,12 @@ import Signin from './pages/Signin'
 import About from './pages/About'
 import Profile from './pages/Profile'
 import SignUp from './pages/SignUp'
+import Header from './Components/Header'
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/sign-in' element={<Signin />} />
@@ -19,7 +21,7 @@ const App = () => {
 
 
       </Routes>
-    </BrowserRouter> 
+    </BrowserRouter>
   )
 }
 
