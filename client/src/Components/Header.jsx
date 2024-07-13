@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaSearch } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
@@ -23,9 +23,14 @@ const Header = () => {
                         <li className='hidden sm:inline text-slate-700 hover:underline cursor-pointer '>Home</li></Link>
                     <Link to='about'>
                         <li className='hidden sm:inline text-slate-700 hover:underline cursor-pointer'>About</li></Link>
-                    <Link to='/profile'>
+                    <Link to='/sign-in'>
                         {currentUser ? (
-                            <img src={currentUser.avatar} alt='profile' className='rounded-full h-7 w-7 object-cover ' />
+                            <img
+                                className='rounded-full h-7 w-7 object-cover '
+                                src={currentUser.avatar}
+                                alt='profile'
+                                onClick={<Navigate to='/profile' />}
+                            />
                         ) : (<li className=' text-slate-700 hover:underline cursor-pointer'>Sign in</li>
                         )}
                     </Link>
