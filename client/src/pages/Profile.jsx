@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRef } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
-import { updateUserFailure, updateUserSuccess, updateUserStart, deleteUserFailure, deleteUserStart, deleteUserSuccess } from '../redux/user/userSlice'
+import { updateUserFailure, updateUserSuccess, updateUserStart, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess } from '../redux/user/userSlice'
 
 // // firebase Storage
 // service cloud.firestore {
@@ -101,13 +101,28 @@ export default function Profile() {
     }
   }
 
+  const handleSignOut = async () => {
+    try {
+      displatch(signOutUserStart());
+      const res = await fetch('api/auth/signout');
+      const data = await res.json();
+      if (data.success === false) {
+        displatch(deleteUserFailure(data.message));
+        return;
+      }
+      displatch(deleteUserSuccess(data));
+    } catch (error) {
+      displatch(deleteUserFailure(data.message));
+    }
+  }
+
   return (
     <div className='p-3 max-w-lg mx-auto '>
 
       <h1 className='text-3xl font-semibold my-7 text-center '>Profile</h1>
       <form action='' onSubmit={handleSubmit} className='flex flex-col gap-4 '>
         <input onChange={(e) => setFile(e.target.files[0])} type='file' ref={fileRef} hidden accept='image/*' />
-        <img onClick={() => fileRef.current.click()} src={formData.avatar || currentUser.avatar} alt='profile' className='rounded-full h-24 w-24 object-cover cursor-pointer self-center'  />
+        <img onClick={() => fileRef.current.click()} src={formData.avatar || currentUser.avatar} alt='profile' className='rounded-full h-24 w-24 object-cover cursor-pointer self-center' />
         <p className='text-sm self-center'>
           {fileUploadError ?
             (<span className='text-red-700 '>error image upload (image must be less than 2mb )
@@ -130,7 +145,7 @@ export default function Profile() {
       </form>
       <div className='flex justify-between mt-5 '>
         <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer '>Delete Account</span>
-        <span className='text-red-700 cursor-pointer '>Sign Out</span>
+        <span className='text-red-700 cursor-pointer ' onClick={handleSignOut}>Sign Out</span>
 
       </div>
 
