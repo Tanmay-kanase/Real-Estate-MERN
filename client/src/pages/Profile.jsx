@@ -18,14 +18,16 @@ import { Link } from 'react-router-dom'
 //   }
 // }
 
-const Profile = () =>  {
+const Profile = () => {
   const fileRef = useRef(null)
   const { currentUser, loading, error } = useSelector((state) => state.user)
   const [file, setFile] = useState(undefined)
+  const [userListings, setUserListings] = useState([])
   const [filePerc, setFilePerc] = useState(0)
   const [fileUploadError, setFileUploadError] = useState(false)
   const [formData, setFormData] = useState({})
   const [updateSuccess, setupdateSuccess] = useState(false);
+  const [showListingError, setShowListingError] = useState(false)
   const displatch = useDispatch();
 
   console.log(formData)
@@ -117,6 +119,21 @@ const Profile = () =>  {
     }
   }
 
+  const handleShowListings = async () => {
+    try {
+      setShowListingError(false)
+      const res = await fetch(`/api/user/listings/${currentUser._id}`)
+      const data = await res.json()
+      if (data.success === false) {
+        setShowListingError(true)
+        return
+      }
+      setUserListings(data)
+    } catch (error) {
+      setShowListingError(true)
+    }
+  }
+
   return (
     <div className='p-3 max-w-lg mx-auto '>
 
@@ -143,7 +160,7 @@ const Profile = () =>  {
         <input type='text' placeholder='email' id='email' defaultValue={currentUser.email} className='border p-3 rounded-lg ' onChange={handleChange}></input>
         <input type='password' placeholder='password' id='password' className='border p-3 rounded-lg '></input>
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 '>{loading ? 'Loading...' : 'update'}</button>
-        <Link className = 'bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-90' to={"/create-listing"}>create listing 
+        <Link className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-90' to={"/create-listing"}>create listing
         </Link>
       </form>
       <div className='flex justify-between mt-5 '>
@@ -153,6 +170,26 @@ const Profile = () =>  {
       </div>
 
       <p className='text-green-700 mt-5 '>{updateSuccess ? 'user updates succesfull' : ''}</p>
+      <button onClick={handleShowListings} className='text-green-700 w-full'>show listings</button>
+      <p>{showListingError ? 'Error Show Listing' : ''}</p>
+      {userListings && userListings.length > 0 &&
+        <div className='flex flex-col gap-4'>
+          <h1 className='text-center mt-7 text-3xl font-semibold'>Your Listings</h1>
+          {userListings.map((listing) => (
+          <div key={listing._id} className='border rounded-lg flex justify-between items-center gap-4'>
+            <Link to={`/listing/${listing._id}`}>
+              <img className='h-16 w-16 object-contain ' src={listing.imageUrls[0]} alt='listing cover'></img>
+            </Link>
+            <Link className='text-slate-900 font-semibold flex-1 hover:underline truncate flex-1' to={`/listing/${listing._id}`}>
+              <p>{listing.name}</p>
+            </Link>
+            <div className='flex flex-col items-center'>
+              <button className='text-red-700 uppercase'>Delete</button>
+              <button className='text-red-700 uppercase'>Edit</button>
+            </div>
+          </div>
+      ))}
+        </div>}
     </div>
   )
 }
