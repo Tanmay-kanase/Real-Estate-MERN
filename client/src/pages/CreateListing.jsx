@@ -136,7 +136,7 @@ const CreateListing = () => {
             <h1 className='text-3xl font-semibold text-center my-7 '>Create a Listing </h1>
             <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
                 <div className='flex flex-col gap-4 flex-1'>
-                    <input type="text" placeholder='Name ' onChange={handleChange} value={formData.name} className='border p-3 rounded-lg ' id='name' maxLength='10' required />
+                    <input type="text" placeholder='Name ' onChange={handleChange} value={formData.name} className='border p-3 rounded-lg ' id='name'  required />
                     <textarea type="text" onChange={handleChange} value={formData.description} placeholder='Description ' className='border p-3 rounded-lg ' id='description' required />
                     <input type="text" placeholder='Address' onChange={handleChange} value={formData.address} className='border p-3 rounded-lg ' id='address' required />
                     <div className='flex gap-6 flex-wrap '>
@@ -159,10 +159,10 @@ const CreateListing = () => {
                     </div>
                     <div className='flex gap-6 flex-wrap '>
                         <div className='flex items-center gap-2 '>
-                            <input onChange={handleChange} value={formData.bedrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="beds" min='1' max='10' required /><p>Beds</p>
+                            <input onChange={handleChange} value={formData.bedrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="beds"  required /><p>Beds</p>
                         </div>
                         <div className='flex items-center gap-2 '>
-                            <input onChange={handleChange} value={formData.bathrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bathrooms" min='1' max='10' required /><p>Baths</p>
+                            <input onChange={handleChange} value={formData.bathrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bathrooms"  required /><p>Baths</p>
                         </div>
                         <div className='flex items-center gap-2 '>
                             <input className='p-3 border border-gray-300 rounded-lg' type="number" id="regularPrice" min='50' max='10000000' required onChange={handleChange} value={formData.regularPrice} />
@@ -175,7 +175,7 @@ const CreateListing = () => {
                         {formData.offer && (
 
                             <div className='flex items-center gap-2 '>
-                                <input className='p-3 border border-gray-300 rounded-lg' type="number" id="discountPrice" min='1' max='10' required onChange={handleChange} value={formData.discountPrice} />
+                                <input className='p-3 border border-gray-300 rounded-lg' type="number" id="discountPrice"  required onChange={handleChange} value={formData.discountPrice} />
                                 <div className='flex flex-col items-center '>
                                     <p>Discountes Price</p>
                                     <span className='text-xs '>($/month)</span>
