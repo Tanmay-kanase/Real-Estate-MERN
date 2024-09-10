@@ -4,7 +4,7 @@ import { FaMapMarkerAlt  } from 'react-icons/fa'
 
 export default function Listingitem({listing}) {
   return (
-    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
+    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[270px]'>
         <Link to={`/listing/${listing._id}`}>
            <img src={listing.imageUrls[0] || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu7ifM8hcrdVJ9FCF4_5JhyVNqBrnRNCl-FA&s"} alt='listing cover' className='h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300' />
         
