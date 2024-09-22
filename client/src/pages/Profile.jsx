@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRef } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
-import { updateUserFailure, updateUserSuccess, updateUserStart, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess } from '../redux/user/userSlice'
+import { updateUserFailure, updateUserSuccess, updateUserStart, deleteUserFailure, deleteUserStart,  signOutUserStart,} from '../redux/user/userSlice'
 import { Link } from 'react-router-dom'
 
 // // firebase Storage
@@ -198,7 +198,7 @@ const Profile = () => {
               <Link to={`/listing/${listing._id}`}>
                 <img className='h-16 w-16 object-contain ' src={listing.imageUrls[0]} alt='listing cover'></img>
               </Link>
-              <Link className='text-slate-900 font-semibold flex-1 hover:underline truncate flex-1' to={`/listing/${listing._id}`}>
+              <Link className='text-slate-900 font-semibold flex-1 hover:underline truncate ' to={`/listing/${listing._id}`}>
                 <p>{listing.name}</p>
               </Link>
               <div className='flex flex-col items-center'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
@@ -13,8 +13,6 @@ const Header = () => {
         urlParams.set('searchTerm' , searchTerm)
         const searchQuery = urlParams.toString()
         navigate(`/search?${searchQuery}`)
-
-
     }
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
