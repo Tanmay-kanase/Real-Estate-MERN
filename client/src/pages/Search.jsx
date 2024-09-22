@@ -14,7 +14,7 @@ export default function Search() {
         parking: false,
         furnished: false,
         offer: false,
-        sort: 'createdAt',
+        sort: 'created_at',
         order: 'desc',
     })
     useEffect(() => {
@@ -47,13 +47,14 @@ export default function Search() {
         }
         const fetchListings = async () => {
             setLoading(true)
+            setShowMore(false)
             const searchQuery = urlParams.toString()
             const res = await fetch(`/api/listing/get?${searchQuery}`)
             const data = await res.json()
             if (data.length > 8) {
-                setShowMore(true);
+                setShowMore(true)
             } else {
-                setShowMore(false);
+                setShowMore(false)
             }
             setListings(data)
             setLoading(false)
@@ -130,7 +131,7 @@ export default function Search() {
                             <span>Sale</span>
                         </div>
                         <div className='flex gap-2'>
-                            <input type="checkbox" id='offer' className='w-5' onChange={handleChange} checked={sidebardata.offer === 'offer'} />
+                            <input type="checkbox" id='offer' className='w-5' onChange={handleChange} checked={sidebardata.offer} />
                             <span>Offer</span>
                         </div>
                     </div>

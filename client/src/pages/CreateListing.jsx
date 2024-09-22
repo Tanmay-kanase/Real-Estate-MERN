@@ -80,7 +80,7 @@ const CreateListing = () => {
         })
     }
     const handleChange = (e) => {
-        if (e.target.id === 'sale' || e.target.id === 'rent') {
+        if (e.target.id === 'sale' || e.target.id === 'rent' || e.target.id === 'images') {
             setFormData({
                 ...formData,
                 type: e.target.id,
@@ -159,7 +159,7 @@ const CreateListing = () => {
                     </div>
                     <div className='flex gap-6 flex-wrap '>
                         <div className='flex items-center gap-2 '>
-                            <input onChange={handleChange} value={formData.bedrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="beds"  required /><p>Beds</p>
+                            <input onChange={handleChange} value={formData.bedrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bedrooms"  required /><p>Beds</p>
                         </div>
                         <div className='flex items-center gap-2 '>
                             <input onChange={handleChange} value={formData.bathrooms} className='p-3 border border-gray-300 rounded-lg' type="number" id="bathrooms"  required /><p>Baths</p>
@@ -177,7 +177,7 @@ const CreateListing = () => {
                             <div className='flex items-center gap-2 '>
                                 <input className='p-3 border border-gray-300 rounded-lg' type="number" id="discountPrice"  required onChange={handleChange} value={formData.discountPrice} />
                                 <div className='flex flex-col items-center '>
-                                    <p>Discountes Price</p>
+                                    <p>Discounted Price</p>
                                     <span className='text-xs '>($/month)</span>
                                 </div>
                             </div>
