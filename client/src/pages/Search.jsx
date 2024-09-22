@@ -24,16 +24,16 @@ export default function Search() {
         const parkingFromUrl = urlParams.get('parking')
         const furnishedFromUrl = urlParams.get('furnished')
         const offerFromUrl = urlParams.get('offer')
-        const sortFroUrl = urlParams.get('sort')
-        const orderFromUtl = urlParams.get('order')
+        const sortFromUrl = urlParams.get('sort')
+        const orderFromUrl = urlParams.get('order')
         if (
             searchTermFromUrl ||
             typeFromUrl ||
             parkingFromUrl ||
             furnishedFromUrl ||
             offerFromUrl ||
-            sortFroUrl ||
-            orderFromUtl
+            sortFromUrl ||
+            orderFromUrl
         ) {
             setSidebardata({
                 searchTerm: searchTermFromUrl || '',
@@ -41,8 +41,8 @@ export default function Search() {
                 parking: parkingFromUrl === 'true' ? true : false,
                 furnished: furnishedFromUrl === 'true' ? true : false,
                 offer: offerFromUrl || 'true' ? true : false,
-                sort: sortFroUrl || 'created_at',
-                order: orderFromUtl || 'desc'
+                sort: sortFromUrl || 'created_at',
+                order: orderFromUrl || 'desc'
             })
         }
         const fetchListings = async () => {
@@ -94,6 +94,7 @@ export default function Search() {
         urlParams.set('order', sidebardata.order)
         const searchQuery = urlParams.toString()
         navigate(`/search?${searchQuery}`)
+        console.log(searchQuery)
     }
     const onShowMoreClick = async () => {
         const numberOfListings = listings.length;
@@ -149,10 +150,10 @@ export default function Search() {
                     <div className="flex items-center gap-2">
                         <label className='font-semibold'>Sort: </label>
                         <select onChange={handleChange} defaultValue={'created_at_desc'} id="sort_order" className='border rounded-lg p-3 '>
-                            <option value={'regularPrice_desc'}>Price high to low</option>
-                            <option value={'regularPrice_asc'}>Price low to high</option>
-                            <option value={'createdAt_desc'}>Latest</option>
-                            <option value={'createdAt_asc'}>Oldest</option>
+                            <option value='regularPrice_desc'>Price high to low</option>
+                            <option value='regularPrice_asc'>Price low to high</option>
+                            <option value='createdAt_desc'>Latest</option>
+                            <option value='createdAt_asc'>Oldest</option>
                         </select>
                     </div>
 
