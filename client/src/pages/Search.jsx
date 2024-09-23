@@ -140,7 +140,7 @@ export default function Search() {
                         <label className='font-semibold' type=''>Amenities: </label>
                         <div className='flex gap-2'>
                             <input type="checkbox" id='parking' className='w-5' onChange={handleChange} checked={sidebardata.parking} />
-                            <span>Parking</span>
+                            <span>Parking..</span>
                         </div>
                         <div className='flex gap-2'>
                             <input type="checkbox" id='furnished' className='w-5' onChange={handleChange} checked={sidebardata.furnished} />
