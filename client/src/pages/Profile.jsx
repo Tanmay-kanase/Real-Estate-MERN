@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRef } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
-import { updateUserFailure, updateUserSuccess, updateUserStart, deleteUserFailure, deleteUserStart,  signOutUserStart,} from '../redux/user/userSlice'
+import { updateUserFailure, updateUserSuccess, updateUserStart, deleteUserFailure, deleteUserStart,  signOutUserStart, deleteUserSuccess} from '../redux/user/userSlice'
 import { Link } from 'react-router-dom'
 
 // // firebase Storage
@@ -115,7 +115,7 @@ const Profile = () => {
       }
       displatch(deleteUserSuccess(data));
     } catch (error) {
-      displatch(deleteUserFailure(data.message));
+      displatch(deleteUserFailure(error.message));
     }
   }
 
