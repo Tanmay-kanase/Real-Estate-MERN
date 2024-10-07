@@ -40,7 +40,7 @@ export default function Search() {
                 type: typeFromUrl || 'all',
                 parking: parkingFromUrl === 'true' ? true : false,
                 furnished: furnishedFromUrl === 'true' ? true : false,
-                offer: offerFromUrl || 'true' ? true : false,
+                offer: offerFromUrl === 'true' ? true : false,
                 sort: sortFromUrl || 'created_at',
                 order: orderFromUrl || 'desc'
             })
@@ -74,7 +74,7 @@ export default function Search() {
         }
 
         if (e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer') {
-            setSidebardata({ ...sidebardata, [e.target.id]: e.target.checked , })
+            setSidebardata({ ...sidebardata, [e.target.id]: e.target.checked || e.target.checked === 'true' ? true : false, })
         }
         if (e.target.id === 'sort_order') {
             const sort = e.target.value.split('_')[0] || 'created_at'
@@ -82,6 +82,7 @@ export default function Search() {
             setSidebardata({ ...sidebardata, sort, order })
         }
     }
+    console.log(sidebardata)
     const handleSubmit = (e) => {
         e.preventDefault()
         const urlParams = new URLSearchParams()
@@ -94,7 +95,6 @@ export default function Search() {
         urlParams.set('order', sidebardata.order)
         const searchQuery = urlParams.toString()
         navigate(`/search?${searchQuery}`)
-        console.log(searchQuery)
     }
     const onShowMoreClick = async () => {
         const numberOfListings = listings.length;
