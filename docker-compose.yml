@@ -1,0 +1,32 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - mern_network
+
+  client:
+    build:
+      context: ./client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/usr/src/app
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api
+    networks:
+      - mern_network
+
+networks:
+  mern_network:
+    driver: bridge
