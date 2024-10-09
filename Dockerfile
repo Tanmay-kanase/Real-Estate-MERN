@@ -2,10 +2,10 @@
 FROM node:20.14.0
 
 # Set the working directory inside the container
-WORKDIR /usr/src/app
+WORKDIR /usr/src
 
 # Copy the package.json and package-lock.json files from the root directory
-COPY ../package*.json ./
+COPY package*.json ./
 
 # Install backend dependencies from root
 RUN npm install

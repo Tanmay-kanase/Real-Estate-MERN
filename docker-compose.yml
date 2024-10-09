@@ -1,25 +1,28 @@
-version: '3'
+version: '3.8'
 services:
+  
   api:
-    build:
-      context: ./
+    build: 
+      context: .  
     ports:
-      - "8888:8888"
+      - "8080:8888"
     volumes:
-      - ./:/usr/src/app
-      - ./node_modules:/usr/src/app/node_modules
+      - ./api:/usr/src/app
     environment:
       - NODE_ENV=development
+      - MONGO_URI=  mongodb+srv://Tanmay-Kanase:Tanmay%400707@mern-estate.q2kedho.mongodb.net/mern-estate?retryWrites=true&w=majority&appName=mern-estate
     networks:
       - mern_network
 
+
   client:
-    build:
-      context: ./client
+    build: ./client
     ports:
       - "5173:5173"
     volumes:
-      - ./client:/usr/src/app
+      - ./client:/usr/src/client
+    env_file:
+      - .env
     environment:
       - NODE_ENV=development
     depends_on:
@@ -30,3 +33,4 @@ services:
 networks:
   mern_network:
     driver: bridge
+

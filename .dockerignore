@@ -4,11 +4,6 @@ client/node_modules
 
 # Ignore log files
 *.log
-*.txt
-
-# Ignore local environment files
-.env
-client/.env
 
 # Ignore build outputs (optional if you don’t want to include built files directly)
 build/
