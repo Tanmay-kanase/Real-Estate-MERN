@@ -4,33 +4,18 @@ services:
   api:
     build: 
       context: .  
+      dockerfile: dockerfile
     ports:
       - "8080:8888"
-    volumes:
-      - ./api:/usr/src/app
     environment:
+      - MONGO_URI =  mongodb+srv://Tanmay-Kanase:Tanmay%400707@mern-estate.q2kedho.mongodb.net/mern-estate?retryWrites=true&w=majority&appName=mern-estate
       - NODE_ENV=development
-      - MONGO_URI=  mongodb+srv://Tanmay-Kanase:Tanmay%400707@mern-estate.q2kedho.mongodb.net/mern-estate?retryWrites=true&w=majority&appName=mern-estate
-    networks:
-      - mern_network
-
 
   client:
     build: ./client
     ports:
       - "5173:5173"
-    volumes:
-      - ./client:/usr/src/client
-    env_file:
-      - .env
-    environment:
-      - NODE_ENV=development
     depends_on:
       - api
-    networks:
-      - mern_network
 
-networks:
-  mern_network:
-    driver: bridge
 
